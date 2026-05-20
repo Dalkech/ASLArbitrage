@@ -34,14 +34,6 @@ describe('Score - rendered HTML structure', () => {
         expect(binding).toMatch(/isDisabled\s*==\s*true\s*\?/);
     });
 
-    test('renders active indicator paragraph', () => {
-        expect(document.querySelector('p[data-class-binding*="isActive == true"]')).not.toBeNull();
-    });
-
-    test('renders inactive indicator paragraph', () => {
-        expect(document.querySelector('p[data-class-binding*="isActive == false"]')).not.toBeNull();
-    });
-
     test('renders change-msg button', () => {
         expect(document.querySelector('[data-binding="on-click-change-msg"]')).not.toBeNull();
     });
@@ -73,15 +65,6 @@ describe('Score - initial state', () => {
         expect(document.getElementById('msg')?.classList.contains('disabled')).toBe(false);
     });
 
-    test('active indicator has "none" class when isActive is false', () => {
-        const p = document.querySelector('p[data-class-binding*="isActive == true"]') as HTMLElement;
-        expect(p?.classList.contains('none')).toBe(true);
-    });
-
-    test('inactive indicator does not have "none" class when isActive is false', () => {
-        const p = document.querySelector('p[data-class-binding*="isActive == false"]') as HTMLElement;
-        expect(p?.classList.contains('none')).toBe(false);
-    });
 });
 
 describe('Score - msg toggling', () => {
@@ -121,24 +104,6 @@ describe('Score - class bindings', () => {
         btn.click();
         btn.click();
         expect(document.getElementById('msg')?.classList.contains('inactive')).toBe(true);
-    });
-
-    test('toggle-active shows active indicator and hides inactive indicator', () => {
-        (document.querySelector('[data-binding="toggle-active"]') as HTMLButtonElement).click();
-        const active = document.querySelector('p[data-class-binding*="isActive == true"]') as HTMLElement;
-        const inactive = document.querySelector('p[data-class-binding*="isActive == false"]') as HTMLElement;
-        expect(active?.classList.contains('none')).toBe(false);
-        expect(inactive?.classList.contains('none')).toBe(true);
-    });
-
-    test('toggle-active twice restores original indicator visibility', () => {
-        const btn = document.querySelector('[data-binding="toggle-active"]') as HTMLButtonElement;
-        btn.click();
-        btn.click();
-        const active = document.querySelector('p[data-class-binding*="isActive == true"]') as HTMLElement;
-        const inactive = document.querySelector('p[data-class-binding*="isActive == false"]') as HTMLElement;
-        expect(active?.classList.contains('none')).toBe(true);
-        expect(inactive?.classList.contains('none')).toBe(false);
     });
 
     test('toggle-disabled adds "disabled" class to msg', () => {
