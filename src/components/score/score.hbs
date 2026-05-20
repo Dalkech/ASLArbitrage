@@ -1,0 +1,32 @@
+<div id="score">
+    <h1>Score</h1>
+    <div>
+		<h3>Bound message who can change :</h3>
+        <p 
+			id="msg" 
+			class="text"
+			data-binding="msg"
+			data-class-binding="
+				isActive == true ? '' : 'inactive';
+				isDisabled == true ? 'disabled' : '';"
+			>
+		</p>
+        
+		<button 
+            type="button" 
+            data-binding="on-click-change-msg"> 
+            change the text
+        </button>
+		<button 
+            type="button" 
+            data-binding="toggle-active"> 
+            toggle active
+        </button>
+		<button 
+			type="button" 
+			data-binding="toggle-disabled"> 
+			toggle disabled
+		</button>
+
+    </div>
+</div>

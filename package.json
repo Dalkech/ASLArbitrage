@@ -1,0 +1,26 @@
+{
+  "name": "asl-arbitrage",
+  "keywords": [],
+  "author": "Dalkech",
+  "license": "MIT",
+  "description": "Lightweight single-file web client for referee scoring of duels.",
+  "changelog": "CHANGELOG.md",
+  "devDependencies": {
+    "@types/jest": "^30.0.0",
+    "jest": "^29.7.0",
+    "jest-environment-jsdom": "^29.7.0",
+    "ts-jest": "^29.4.6",
+    "typescript": "^5.9.3",
+    "vite-plugin-singlefile": "^2.3.0"
+  },
+  "dependencies": {
+    "vite-plugin-handlebars": "^2.0.0"
+  },
+  "scripts": {
+    "vite": "vite build",
+    "vite-watch": "npx vite dev",
+    "build": "npx tsc & vite build",
+    "build-watch": "start npx tsc -w & start vite build --watch",
+    "test": "jest"
+  }
+}

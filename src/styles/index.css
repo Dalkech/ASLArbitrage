@@ -1,0 +1,22 @@
+body {
+	color : lightslategrey
+}
+
+.text {
+	color : blue;
+	&.inactive {
+		color : red
+	}
+	&.valid {
+		color : green
+	}
+	&.disabled {
+		text-decoration: line-through;
+		font-style: italic;
+		opacity: 0.3;
+	}
+}
+
+.none {
+	display: none;
+}

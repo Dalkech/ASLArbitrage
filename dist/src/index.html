@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+  <script type="module" crossorigin>(function(){"use strict";function v(o){const n={},m=e=>{const t=/^watch(.+)$/.exec(e);return t?t[1].charAt(0).toLowerCase()+t[1].slice(1):void 0},g=e=>typeof e!="string",l=e=>document.querySelectorAll(`[data-binding="${String(e)}"]`),d=(e,t)=>{t in e&&l(t)?.forEach(s=>{let i=s.cloneNode(!1);const c=e[t]?.toString()??"";i.textContent=c,s.replaceWith(i)})},p=e=>{if(e==="true")return!0;if(e==="false")return!1;if(e==="null")return null;if(/^['"]/.test(e))return e.slice(1,-1);const t=Number(e);return isNaN(t)?e:t},S=(e,t,s)=>{switch(t){case">":return e>s;case"<":return e<s;case">=":return e>=s;case"<=":return e<=s;case"==":return e==s;case"===":return e===s;case"!=":return e!=s;case"!==":return e!==s;default:return!1}},E=/(.+?)\s*(==|!=|>=|<=|>|<)\s*(['"]?[^'"]*?['"]?)\s*\?\s*['"]([^'"]*?)['"]\s*:\s*['"]([^'"]*?)['"]/,L=(e,t)=>{const s=e[t];document.querySelectorAll(`[data-class-binding*="${String(t)} "]`).forEach(i=>{const c=i.getAttribute("data-class-binding");if(!c)return;const a=c.split(";").map(u=>u.trim()).filter(u=>u),r=i.classList;a.forEach(u=>{const b=E.exec(u);if(!b)return;const[,P,w,D,f,h]=b;if(P.trim()!==t)return;const O=S(s,w,p(D.trim()));r.value&&(f&&r.remove(f),h&&r.remove(h)),O&&f&&r.add(f),!O&&h&&r.add(h)})})},k=(e,t)=>{d(e,t),L(e,t)},C=new Proxy(o,{get(e,t){if(g(t))return Reflect.get(e,t);const s=m(t);return s?i=>((n[s]??=[]).push(i),()=>{n[s]=n[s]?.filter(c=>c!==i)}):Reflect.get(e,t)},set(e,t,s){if(g(t))return Reflect.set(e,t,s);const i=t,c=e[i],a=Reflect.set(e,i,s);return s===c||!a||(k(o,t),n[i]?.forEach(r=>r(s))),a}});return Object.keys(o).forEach(e=>k(o,e)),C}class y{state=void 0;OnclickChangeMsg=()=>{this.state.msg=="Hello"?this.state.msg="Goodbye":this.state.msg="Hello"};OnclickToggleActive=()=>this.state.isActive=!this.state.isActive;OnclickToggleDisabled=()=>this.state.isDisabled=!this.state.isDisabled;constructor(){this.state=v({msg:"Hello",isActive:!1,isDisabled:!1}),this.bindWatchers(),this.bindButtons(),console.info("Score is instantiate")}bindWatchers(){this.state.watchMsg(n=>console.log(`MSG changed for ${n}`)),this.state.watchIsActive(n=>console.log(`isActive changed for ${n}`)),this.state.watchIsDisabled(n=>console.log(`isDisabled changed for ${n}`))}bindButtons=()=>{document.querySelectorAll('button[type="button"][data-binding="on-click-change-msg"]')?.forEach(n=>n.addEventListener("click",()=>this.OnclickChangeMsg())),document.querySelectorAll('button[type="button"][data-binding="toggle-active"]')?.forEach(n=>n.addEventListener("click",()=>this.OnclickToggleActive())),document.querySelectorAll('button[type="button"][data-binding="toggle-disabled"]')?.forEach(n=>n.addEventListener("click",()=>this.OnclickToggleDisabled()))};printScore=()=>{throw new Error("Method not implemented.")}}class A{Score=new y;constructor(){console.log("hello from SSLarbitrage Welcome, Setting up is over ")}}console.log("Display version"),new A,console.log("App initialized")})();</script>
+  <style rel="stylesheet" crossorigin>body{color:#789}.text{color:#00f;&.inactive{color:red}&.valid{color:green}&.disabled{text-decoration:line-through;font-style:italic;opacity:.3}}.none{display:none}body{font-family:Arial,Helvetica,sans-serif}</style>
+</head>
+<body>
+    Hello World 4
+    <!-- call the main attr -->
+    <div id="score">
+        <h1>Score</h1>
+        <div>
+    		<h3>Bound message who can change :</h3>
+            <p 
+    			id="msg" 
+    			class="text"
+    			data-binding="msg"
+    			data-class-binding="
+    				isActive == true ? '' : 'inactive';
+    				isDisabled == true ? 'disabled' : '';"
+    			>
+    		</p>
+            
+    		<button 
+                type="button" 
+                data-binding="on-click-change-msg"> 
+                change the text
+            </button>
+    		<button 
+                type="button" 
+                data-binding="toggle-active"> 
+                toggle active
+            </button>
+    		<button 
+    			type="button" 
+    			data-binding="toggle-disabled"> 
+    			toggle disabled
+    		</button>
+    
+        </div>
+    </div>    <!-- test-->
+</body>
+</html>
